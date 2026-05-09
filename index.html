@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Policy Analysis Dashboard</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js" defer></script>
+  <script src="js/models.js" defer></script>
+  <script src="js/charts.js" defer></script>
+  <script src="js/policies.js" defer></script>
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <h1>◈ AI POLICY ANALYSIS DASHBOARD</h1>
+    <span id="ts"></span>
+  </header>
+
+  <div class="main">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+      <!-- Upload -->
+      <div>
+        <h2>Data Source</h2>
+        <div class="upload-zone" id="dropzone">
+          <div class="icon">📂</div>
+          <strong id="fileName">Drop CSV here</strong>
+          <p id="fileInfo">or click to browse</p>
+          <input type="file" id="csvInput" accept=".csv"/>
+        </div>
+      </div>
+
+      <!-- Model Selection -->
+      <div>
+        <h2>Model Selection</h2>
+        <div class="model-list">
+          <button class="model-btn active" data-model="seir">
+            <span class="model-dot" style="background:#00d4aa"></span>SEIR Epidemiological
+          </button>
+          <button class="model-btn" data-model="llm">
+            <span class="model-dot" style="background:#6366f1"></span>LLM-Guided SEIR
+          </button>
+          <button class="model-btn" data-model="sir">
+            <span class="model-dot" style="background:#f59e0b"></span>SIR Classic
+          </button>
+          <button class="model-btn" data-model="agent">
+            <span class="model-dot" style="background:#ef4444"></span>Agent-Based
+          </button>
+        </div>
+      </div>
+
+      <!-- Parameters -->
+      <div>
+        <h2>Parameters</h2>
+        <div class="param-group">
+          <div class="param-row">
+            <label>β (Transmission)</label>
+            <input type="range" id="beta" min="0.1" max="1.0" step="0.01" value="0.3"/>
+            <span class="param-val" id="betaV">0.30</span>
+          </div>
+          <div class="param-row">
+            <label>γ (Recovery)</label>
+            <input type="range" id="gamma" min="0.01" max="0.5" step="0.01" value="0.1"/>
+            <span class="param-val" id="gammaV">0.10</span>
+          </div>
+          <div class="param-row">
+            <label>σ (Incubation)</label>
+            <input type="range" id="sigma" min="0.01" max="0.5" step="0.01" value="0.2"/>
+            <span class="param-val" id="sigmaV">0.20</span>
+          </div>
+          <div class="param-row">
+            <label>Days</label>
+            <input type="range" id="days" min="30" max="365" step="5" value="180"/>
+            <span class="param-val" id="daysV">180</span>
+          </div>
+        </div>
+      </div>
+
+      <button class="run-btn" id="runBtn">▶ RUN ANALYSIS</button>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="content" id="contentArea">
+      <div class="empty-state" id="emptyState">
+        <div class="big">🧬</div>
+        <h3>Upload CSV to begin</h3>
+        <p>Load your dataset, select a model, tune parameters, and run analysis to generate policy recommendations and visualizations.</p>
+      </div>
+    </main>
+
+  </div>
+</body>
+</html>
